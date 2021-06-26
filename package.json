@@ -1,11 +1,12 @@
 {
   "name": "zidence-platform",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "nx": "nx",
-    "start": "nx serve",
+    "serve": "nx serve",
     "build": "nx build",
+    "start": "node dist/apps/zidence-api/main",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
@@ -27,7 +28,9 @@
   },
   "private": true,
   "dependencies": {
+    "cors": "2.8.5",
     "express": "4.17.1",
+    "morgan": "1.10.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

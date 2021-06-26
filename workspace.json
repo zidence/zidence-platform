@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "projects": {
+    "zidence-api": {
+      "root": "apps/zidence-api",
+      "sourceRoot": "apps/zidence-api/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/zidence-api",
+            "main": "apps/zidence-api/src/main.ts",
+            "tsConfig": "apps/zidence-api/tsconfig.app.json",
+            "assets": ["apps/zidence-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/zidence-api/src/environments/environment.ts",
+                  "with": "apps/zidence-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "zidence-api:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/zidence-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/zidence-api"],
+          "options": {
+            "jestConfig": "apps/zidence-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/express"
+  },
+  "defaultProject": "zidence-api"
+}

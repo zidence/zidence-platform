@@ -11,45 +11,41 @@ generator client {
 }
 
 model Properties {
-  id                   Int     @id @default(autoincrement())
-  name                 String  @db.VarChar(300)
-  slug                 String  @db.VarChar(300)
-  images               String
-  price                Int     @db.Integer
-  type                 String  @db.VarChar(300)
-  subtype              String  @db.VarChar(300)
-  owner                String  @db.VarChar(300)
-  developer            String  @db.VarChar(300)
-  yearBuilt            Int     @db.Integer
-  lotSize              Int     @db.Integer
-  unitSize             Int     @db.Integer
-  numberOfBedrooms     Int     @db.Integer
-  numberOfBathrooms    Int     @db.Integer
-  parkingLot           Boolean @db.Boolean
-  listOfNearestObjects String
-  // locations            Locations @relation(fields: [locationId], references: [id])
-  // locationId           Int
+  id                   Int      @id @default(autoincrement())
+  name                 String
+  slug                 String
+  images               String[]
+  price                Int
+  type                 String
+  subtype              String
+  owner                String
+  developer            String
+  yearBuilt            Int
+  lotSize              Int
+  unitSize             Int
+  numberOfBedrooms     Int
+  numberOfBathrooms    Int
+  parkingLot           Boolean
+  listOfNearestObjects String[]
+  // locations            Locations? @relation(fields: [locationId], references: [id])
+  // locationId           Int?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Locations {
   id       Int    @id @default(autoincrement())
-  address  String @db.VarChar(600)
-  city     String @db.VarChar(300)
-  province String @db.VarChar(300)
-  zipCode  Int    @db.Integer
-  country  String @db.VarChar(300)
-  // geo      Geolocation @relation(fields: [geoId], references: [id])
-  // geoId    Int
-
-  // Properties Properties[]
+  address  String
+  city     String
+  province String
+  zipCode  Int
+  country  String
+  // geo      Geolocation? @relation(fields: [geoId], references: [id])
+  // geoId    Int?
 }
 
 model Geolocation {
   id  Int   @id @default(autoincrement())
-  lat Float @db.DoublePrecision
-  lng Float @db.DoublePrecision
+  lat Float
+  lng Float
   // Locations Locations[]
 }

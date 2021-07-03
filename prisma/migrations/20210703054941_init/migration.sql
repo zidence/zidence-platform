@@ -1,23 +1,21 @@
 -- CreateTable
 CREATE TABLE "Properties" (
     "id" SERIAL NOT NULL,
-    "name" VARCHAR(300) NOT NULL,
-    "slug" VARCHAR(300) NOT NULL,
-    "images" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "images" TEXT[],
     "price" INTEGER NOT NULL,
-    "type" VARCHAR(300) NOT NULL,
-    "subtype" VARCHAR(300) NOT NULL,
-    "owner" VARCHAR(300) NOT NULL,
-    "developer" VARCHAR(300) NOT NULL,
+    "type" TEXT NOT NULL,
+    "subtype" TEXT NOT NULL,
+    "owner" TEXT NOT NULL,
+    "developer" TEXT NOT NULL,
     "yearBuilt" INTEGER NOT NULL,
     "lotSize" INTEGER NOT NULL,
     "unitSize" INTEGER NOT NULL,
     "numberOfBedrooms" INTEGER NOT NULL,
     "numberOfBathrooms" INTEGER NOT NULL,
     "parkingLot" BOOLEAN NOT NULL,
-    "listOfNearestObjects" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "listOfNearestObjects" TEXT[],
 
     PRIMARY KEY ("id")
 );
@@ -25,11 +23,11 @@ CREATE TABLE "Properties" (
 -- CreateTable
 CREATE TABLE "Locations" (
     "id" SERIAL NOT NULL,
-    "address" VARCHAR(600) NOT NULL,
-    "city" VARCHAR(300) NOT NULL,
-    "province" VARCHAR(300) NOT NULL,
+    "address" TEXT NOT NULL,
+    "city" TEXT NOT NULL,
+    "province" TEXT NOT NULL,
     "zipCode" INTEGER NOT NULL,
-    "country" VARCHAR(300) NOT NULL,
+    "country" TEXT NOT NULL,
 
     PRIMARY KEY ("id")
 );

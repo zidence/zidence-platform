@@ -1,9 +1,7 @@
 import { Request, Response } from "express"
-import { PrismaClient } from '@prisma/client'
 import slugify from "slugify"
+import prisma from "../prismaClient"
 
-
-const prisma = new PrismaClient()
 
 interface PropertyTypes {
   name: string;
@@ -56,7 +54,7 @@ export const addProperty = async (req: Request, res: Response) => {
         numberOfBathrooms,
         parkingLot,
         listOfNearestObjects,
-        slug: slugify(name)
+        slug: slugify(name).toLowerCase(),
       }
     })
 
@@ -75,7 +73,7 @@ export const addProperty = async (req: Request, res: Response) => {
 
 export const getProperties = async (req: Request, res: Response) => {
   try {
-    const properties = await prisma.property.findMany();
+    const properties = await prisma.properties.findMany();
 
     if (!properties) {
       return res.status(404).json({

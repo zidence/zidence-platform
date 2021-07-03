@@ -73,14 +73,21 @@ export const addProperty = async (req: Request, res: Response) => {
   }
 }
 
-export getProperty = async (req: Request, res: Response) => {
+export const getProperties = async (req: Request, res: Response) => {
   try {
-    const listProperty = await prisma.property.findMany()
+    const properties = await prisma.property.findMany();
 
+    if (!properties) return res.status(404).json({
+      message: "Properties Not Found !."
+    })
+
+    res.status(200).json(properties)
 
   } catch (error) {
-
-
+    res.status(400).json({
+      message: error.message
+    })
+    console.error(error.message);
   }
 }
 

@@ -1,18 +1,15 @@
 import * as express from 'express'
 
 const router = express.Router()
+import { addProperty } from "./controller"
 
-router.get('/', (req, res) => {
-  res.send([
-    {
-      id: 1,
-      type: 'House',
-    },
-    {
-      id: 2,
-      type: 'Apartment',
-    },
-  ])
-})
+
+
+router.post('/', addProperty)
+
+//locations
+// router.post('/', addLocation)
+// router.put('/', updateLocation)
+// router.delete('/', deleteLocation)
 
 export default router

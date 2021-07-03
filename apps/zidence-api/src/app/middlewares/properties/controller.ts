@@ -4,20 +4,20 @@ import prisma from "../prismaClient"
 
 
 interface PropertyTypes {
-  name: string;
-  images: string;
-  price: number,
-  owner: string;
-  subtype: string,
-  developer: string;
-  yearBuilt: number;
-  lotSize: number;
-  unitSize: number;
-  numberOfBedrooms: number;
-  numberOfBathrooms: number;
-  parkingLot: boolean;
-  listOfNearestObjects: string;
-  slug: string;
+  name: string
+  images: string
+  price: number
+  owner: string
+  subtype: string
+  developer: string
+  yearBuilt: number
+  lotSize: number
+  unitSize: number
+  numberOfBedrooms: number
+  numberOfBathrooms: number
+  parkingLot: boolean
+  listOfNearestObjects: string
+  slug: string
 }
 
 

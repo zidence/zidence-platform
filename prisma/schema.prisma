@@ -12,6 +12,8 @@ generator client {
 
 model Properties {
   id                   Int      @id @default(autoincrement())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
   name                 String
   slug                 String
   images               String[]
@@ -29,23 +31,22 @@ model Properties {
   listOfNearestObjects String[]
   // locations            Locations? @relation(fields: [locationId], references: [id])
   // locationId           Int?
-
 }
 
-model Locations {
-  id       Int    @id @default(autoincrement())
-  address  String
-  city     String
-  province String
-  zipCode  Int
-  country  String
-  // geo      Geolocation? @relation(fields: [geoId], references: [id])
-  // geoId    Int?
-}
+// model Locations {
+//   id       Int    @id @default(autoincrement())
+//   address  String
+//   city     String
+//   province String
+//   zipCode  Int
+//   country  String
+//   // geo      Geolocation? @relation(fields: [geoId], references: [id])
+//   // geoId    Int?
+// }
 
-model Geolocation {
-  id  Int   @id @default(autoincrement())
-  lat Float
-  lng Float
-  // Locations Locations[]
-}
+// model Geolocation {
+//   id  Int   @id @default(autoincrement())
+//   lat Float
+//   lng Float
+//   // Locations Locations[]
+// }

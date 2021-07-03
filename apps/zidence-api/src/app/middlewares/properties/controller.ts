@@ -41,7 +41,7 @@ export const addProperty = async (req: Request, res: Response) => {
       listOfNearestObjects,
     }: PropertyTypes = req.body
 
-    const createProperty = await prisma.property.create({
+    const createProperty = await prisma.properties.create({
       data: {
         name,
         images,
@@ -77,9 +77,11 @@ export const getProperties = async (req: Request, res: Response) => {
   try {
     const properties = await prisma.property.findMany();
 
-    if (!properties) return res.status(404).json({
-      message: "Properties Not Found !."
-    })
+    if (!properties) {
+      return res.status(404).json({
+        message: "Properties Not Found !."
+      })
+    }
 
     res.status(200).json(properties)
 

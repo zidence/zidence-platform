@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Property" (
+CREATE TABLE "Properties" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(300) NOT NULL,
     "slug" VARCHAR(300) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE "Locations" (
 );
 
 -- CreateTable
-CREATE TABLE "Geolocations" (
+CREATE TABLE "Geolocation" (
     "id" SERIAL NOT NULL,
     "lat" DOUBLE PRECISION NOT NULL,
     "lng" DOUBLE PRECISION NOT NULL,

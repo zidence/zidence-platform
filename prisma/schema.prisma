@@ -10,7 +10,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Property {
+model Properties {
   id                   Int     @id @default(autoincrement())
   name                 String  @db.VarChar(300)
   slug                 String  @db.VarChar(300)
@@ -41,13 +41,13 @@ model Locations {
   province String @db.VarChar(300)
   zipCode  Int    @db.Integer
   country  String @db.VarChar(300)
-  // geo      Geolocations @relation(fields: [geoId], references: [id])
+  // geo      Geolocation @relation(fields: [geoId], references: [id])
   // geoId    Int
 
   // Properties Properties[]
 }
 
-model Geolocations {
+model Geolocation {
   id  Int   @id @default(autoincrement())
   lat Float @db.DoublePrecision
   lng Float @db.DoublePrecision

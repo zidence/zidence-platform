@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Properties {
+  id                Int      @id @default(autoincrement())
+  name              String?
+  slug              String?
+  price             Int?
+  category          String?
+  subcategory       String?
+  developer         String?
+  yearBuilt         Int?
+  lotSize           Int?
+  unitSize          Int?
+  numberOfBedrooms  Int?
+  numberOfBathrooms Int?
+  parkingLot        Boolean?
+
+  // Relations
+  owner                String?
+  images               String[]
+  listOfNearestObjects String[]
+
+  // Timestamp
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // locations            Locations? @relation(fields: [locationId], references: [id])
+  // locationId           Int?
+  @@map(name: "properties")
+}
+
+// model Locations {
+//   id       Int    @id @default(autoincrement())
+//   address  String
+//   city     String
+//   province String
+//   zipCode  Int
+//   country  String
+//   // geo      Geolocation? @relation(fields: [geoId], references: [id])
+//   // geoId    Int?
+// }
+
+// model Geolocation {
+//   id  Int   @id @default(autoincrement())
+//   lat Float
+//   lng Float
+//   // Locations Locations[]
+// }

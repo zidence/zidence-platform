@@ -1,0 +1,16 @@
+{
+  "name": "Rumah Sederhana",
+  "price": 123000000,
+  "category": "House",
+  "subcategory": "",
+  "owner": "123",
+  "developer": "PT Sederhana",
+  "yearBuilt": 2020,
+  "lotSize": 100,
+  "unitSize": 80,
+  "numberOfBedrooms": 3,
+  "numberOfBathrooms": 2,
+  "parkingLot": true,
+  "listOfNearestObjects": [""],
+  "images": [""]
+}

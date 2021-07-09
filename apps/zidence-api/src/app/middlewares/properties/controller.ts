@@ -6,10 +6,10 @@ import prisma from '../prismaClient'
 export interface PropertyTypes {
   name?: string
   slug?: string
-  type?: string
   price?: number
   owner?: string
-  subtype?: string
+  category?: string
+  subcategory?: string
   developer?: string
   yearBuilt?: number
   lotSize?: number
@@ -27,7 +27,8 @@ export const addProperty = async (req: Request, res: Response) => {
       name,
       images,
       price,
-      subtype,
+      category,
+      subcategory,
       owner,
       developer,
       yearBuilt,
@@ -44,7 +45,8 @@ export const addProperty = async (req: Request, res: Response) => {
         name,
         images,
         price,
-        subtype,
+        category,
+        subcategory,
         owner,
         developer,
         yearBuilt,

@@ -15,15 +15,15 @@ model Properties {
   name              String?
   slug              String?
   price             Int?
-  type              String?
-  subtype           String?
+  category          String?
+  subcategory       String?
   developer         String?
   yearBuilt         Int?
   lotSize           Int?
   unitSize          Int?
-  parkingLot        Boolean?
   numberOfBedrooms  Int?
   numberOfBathrooms Int?
+  parkingLot        Boolean?
 
   // Relations
   owner                String?

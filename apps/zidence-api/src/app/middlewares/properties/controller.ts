@@ -1,25 +1,25 @@
-import { Request, Response } from "express"
-import slugify from "slugify"
-import prisma from "../prismaClient"
+import { Request, Response } from 'express'
+import slugify from 'slugify'
 
+import prisma from '../prismaClient'
 
-interface PropertyTypes {
-  name: string
-  images: string
-  price: number
-  owner: string
-  subtype: string
-  developer: string
-  yearBuilt: number
-  lotSize: number
-  unitSize: number
-  numberOfBedrooms: number
-  numberOfBathrooms: number
-  parkingLot: boolean
-  listOfNearestObjects: string
-  slug: string
+export interface PropertyTypes {
+  name?: string
+  slug?: string
+  type?: string
+  price?: number
+  owner?: string
+  subtype?: string
+  developer?: string
+  yearBuilt?: number
+  lotSize?: number
+  unitSize?: number
+  numberOfBedrooms?: number
+  numberOfBathrooms?: number
+  parkingLot?: boolean
+  listOfNearestObjects?: string[]
+  images?: string[]
 }
-
 
 export const addProperty = async (req: Request, res: Response) => {
   try {
@@ -39,7 +39,7 @@ export const addProperty = async (req: Request, res: Response) => {
       listOfNearestObjects,
     }: PropertyTypes = req.body
 
-    const createProperty = await prisma.properties.create({
+    const newProperty = await prisma.properties.create({
       data: {
         name,
         images,
@@ -55,39 +55,46 @@ export const addProperty = async (req: Request, res: Response) => {
         parkingLot,
         listOfNearestObjects,
         slug: slugify(name).toLowerCase(),
-      }
+      },
     })
 
-    if (!createProperty) {
-      return res.status(404).json({
-        message: "Data Property not found !"
+    if (!newProperty) {
+      return res.status(400).json({
+        message: 'Create new property failed',
       })
     }
 
-    res.status(200).json(createProperty)
+    res.status(200).json({
+      message: 'Create new property success',
+      newProperty,
+    })
   } catch (error) {
-    res.status(400).json(error.message)
     console.error(error.message)
+    res.status(500).json({
+      error: error.message,
+    })
   }
 }
 
 export const getProperties = async (req: Request, res: Response) => {
   try {
-    const properties = await prisma.properties.findMany();
+    const properties = await prisma.properties.findMany()
 
     if (!properties) {
       return res.status(404).json({
-        message: "Properties Not Found !."
+        message: 'Get all properties failed',
       })
     }
 
-    res.status(200).json(properties)
-
-  } catch (error) {
-    res.status(400).json({
-      message: error.message
+    res.status(200).json({
+      message: 'Get all properties',
+      properties,
     })
-    console.error(error.message);
+  } catch (error) {
+    console.error(error.message)
+    res.status(400).json({
+      message: 'Get all properties failed',
+      error: error.message,
+    })
   }
 }
-

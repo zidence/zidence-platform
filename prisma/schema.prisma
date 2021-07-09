@@ -11,26 +11,32 @@ generator client {
 }
 
 model Properties {
-  id                   Int      @id @default(autoincrement())
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-  name                 String
-  slug                 String
+  id                Int      @id @default(autoincrement())
+  name              String?
+  slug              String?
+  price             Int?
+  type              String?
+  subtype           String?
+  developer         String?
+  yearBuilt         Int?
+  lotSize           Int?
+  unitSize          Int?
+  parkingLot        Boolean?
+  numberOfBedrooms  Int?
+  numberOfBathrooms Int?
+
+  // Relations
+  owner                String?
   images               String[]
-  price                Int
-  type                 String
-  subtype              String
-  owner                String
-  developer            String
-  yearBuilt            Int
-  lotSize              Int
-  unitSize             Int
-  numberOfBedrooms     Int
-  numberOfBathrooms    Int
-  parkingLot           Boolean
   listOfNearestObjects String[]
+
+  // Timestamp
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   // locations            Locations? @relation(fields: [locationId], references: [id])
   // locationId           Int?
+  @@map(name: "properties")
 }
 
 // model Locations {

@@ -1,13 +1,9 @@
 import * as express from 'express'
-
 const router = express.Router()
-import { addProperty, getProperties } from "./controller"
 
+import { getProperties, addProperty } from './controller'
 
-
-router.post('/', addProperty)
 router.get('/', getProperties)
-
-
+router.post('/', addProperty)
 
 export default router

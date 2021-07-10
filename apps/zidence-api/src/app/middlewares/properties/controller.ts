@@ -102,3 +102,43 @@ export const getProperties = async (req: Request, res: Response) => {
     console.error(error.message)
   }
 }
+
+
+
+export const getProperty = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+
+    const property = await prisma.properties.findUnique({
+      where: {
+        id: Number(id),
+      }
+    })
+
+    if (!property) {
+      return res.status(400).json({
+        message: 'Get property failed',
+      })
+    }
+
+    res.status(200).json({
+      message: 'Get Property success',
+      property,
+    })
+
+  } catch (error) {
+    res.status(400).json({
+      message: 'Get property failed',
+      error: error.message,
+    })
+    console.error(error.message)
+  }
+}
+
+export const updateProperty = async (req: Request, res: Response) => {
+  res.send("update property")
+}
+
+export const deleteProperty = async (req: Request, res: Response) => {
+  res.send("update property")
+}

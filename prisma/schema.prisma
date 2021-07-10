@@ -15,8 +15,6 @@ model Properties {
   name              String?
   slug              String?
   price             Int?
-  category          String?
-  subcategory       String?
   developer         String?
   yearBuilt         Int?
   lotSize           Int?

@@ -1,15 +1,14 @@
 import { Request, Response } from 'express'
 import slugify from 'slugify'
+import { validationResult } from "express-validator"
 
 import prisma from '../prismaClient'
 
-export interface PropertyTypes {
+export interface IProperty {
   name?: string
   slug?: string
   price?: number
   owner?: string
-  category?: string
-  subcategory?: string
   developer?: string
   yearBuilt?: number
   lotSize?: number
@@ -21,14 +20,19 @@ export interface PropertyTypes {
   images?: string[]
 }
 
+
+
 export const addProperty = async (req: Request, res: Response) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const {
       name,
       images,
       price,
-      category,
-      subcategory,
       owner,
       developer,
       yearBuilt,
@@ -38,15 +42,13 @@ export const addProperty = async (req: Request, res: Response) => {
       numberOfBathrooms,
       parkingLot,
       listOfNearestObjects,
-    }: PropertyTypes = req.body
+    }: IProperty = req.body
 
     const newProperty = await prisma.properties.create({
       data: {
         name,
         images,
         price,
-        category,
-        subcategory,
         owner,
         developer,
         yearBuilt,
@@ -71,10 +73,10 @@ export const addProperty = async (req: Request, res: Response) => {
       newProperty,
     })
   } catch (error) {
-    console.error(error.message)
     res.status(500).json({
       error: error.message,
     })
+    console.error(error.message)
   }
 }
 
@@ -93,10 +95,10 @@ export const getProperties = async (req: Request, res: Response) => {
       properties,
     })
   } catch (error) {
-    console.error(error.message)
     res.status(400).json({
       message: 'Get all properties failed',
       error: error.message,
     })
+    console.error(error.message)
   }
 }

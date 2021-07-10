@@ -10,11 +10,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Properties {
-  id                Int      @id @default(autoincrement())
-  name              String?  @unique
-  slug              String?  @unique
-  price             Decimal? @db.Money
+model Property {
+  id                String   @id @default(cuid())
+  name              String?
+  slug              String?
+  price             Int?
+  category          String?
+  subcategory       String?
   developer         String?
   category          String?
   yearBuilt         Int?
@@ -28,30 +30,29 @@ model Properties {
   owner                String?
   images               String[]
   listOfNearestObjects String[]
+  address              Address?
 
   // Timestamp
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // locations            Locations? @relation(fields: [locationId], references: [id])
-  // locationId           Int?
   @@map(name: "properties")
 }
 
-// model Locations {
-//   id       Int    @id @default(autoincrement())
-//   address  String
-//   city     String
-//   province String
-//   zipCode  Int
-//   country  String
-//   // geo      Geolocation? @relation(fields: [geoId], references: [id])
-//   // geoId    Int?
-// }
+model Address {
+  id           String   @id @default(cuid())
+  street       String?
+  streetDetail String?
+  city         String?
+  province     String?
+  zip          String?
+  country      String?
+  lat          String?
+  long         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-// model Geolocation {
-//   id  Int   @id @default(autoincrement())
-//   lat Float
-//   lng Float
-//   // Locations Locations[]
-// }
+  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId String?
+  @@map(name: "addresses")
+}

@@ -4,6 +4,7 @@ import * as morgan from 'morgan'
 
 import users from './app/middlewares/users/route'
 import properties from './app/middlewares/properties/route'
+import addresses from './app/middlewares/addresses/route'
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.get('/graphql', (req, res) => {
 
 app.use('/api/users', users)
 app.use('/api/properties', properties)
+app.use('/api/addresses', addresses)
 
 app.get('/graphql', (req, res) => {
   res.send({ message: 'Zidence GraphQL API is not available yet' })

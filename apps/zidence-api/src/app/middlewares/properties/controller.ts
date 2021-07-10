@@ -5,11 +5,13 @@ import { validationResult } from "express-validator"
 import prisma from '../prismaClient'
 
 export interface IProperty {
+  propertyId?: number
   name?: string
   slug?: string
   price?: number
   owner?: string
   developer?: string
+  category?: string
   yearBuilt?: number
   lotSize?: number
   unitSize?: number
@@ -35,6 +37,7 @@ export const addProperty = async (req: Request, res: Response) => {
       price,
       owner,
       developer,
+      category,
       yearBuilt,
       lotSize,
       unitSize,
@@ -51,6 +54,7 @@ export const addProperty = async (req: Request, res: Response) => {
         price,
         owner,
         developer,
+        category,
         yearBuilt,
         lotSize,
         unitSize,
@@ -107,11 +111,11 @@ export const getProperties = async (req: Request, res: Response) => {
 
 export const getProperty = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params
+    const { propertyId } = req.params
 
     const property = await prisma.properties.findUnique({
       where: {
-        id: Number(id),
+        id: Number(propertyId),
       }
     })
 
@@ -136,7 +140,69 @@ export const getProperty = async (req: Request, res: Response) => {
 }
 
 export const updateProperty = async (req: Request, res: Response) => {
-  res.send("update property")
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const {
+      propertyId,
+      name,
+      images,
+      price,
+      owner,
+      developer,
+      category,
+      yearBuilt,
+      lotSize,
+      unitSize,
+      numberOfBedrooms,
+      numberOfBathrooms,
+      parkingLot,
+      listOfNearestObjects,
+    }: IProperty = req.body
+
+    const updateProperty = await prisma.properties.update({
+      where: {
+        id: Number(propertyId)
+      },
+      data: {
+        name,
+        images,
+        price,
+        owner,
+        developer,
+        category,
+        yearBuilt,
+        lotSize,
+        unitSize,
+        numberOfBedrooms,
+        numberOfBathrooms,
+        parkingLot,
+        listOfNearestObjects,
+        slug: slugify(name).toLowerCase(),
+      },
+    })
+
+    if (!updateProperty) {
+      return res.status(400).json({
+        message: 'Update property failed',
+      })
+    }
+
+
+    res.status(200).json({
+      message: 'Update Property success',
+      updateProperty,
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: 'Update property failed',
+      error: error.message,
+    })
+    console.error(error.message)
+  }
 }
 
 export const deleteProperty = async (req: Request, res: Response) => {

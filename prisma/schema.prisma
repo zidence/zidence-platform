@@ -12,10 +12,11 @@ generator client {
 
 model Properties {
   id                Int      @id @default(autoincrement())
-  name              String?
-  slug              String?
-  price             Int?
+  name              String?  @unique
+  slug              String?  @unique
+  price             Decimal? @db.Money
   developer         String?
+  category          String?
   yearBuilt         Int?
   lotSize           Int?
   unitSize          Int?

@@ -14,7 +14,7 @@ model Property {
   id                String   @id @default(cuid())
   name              String?
   slug              String?
-  price             Int?
+  price             Decimal? @db.Decimal
   category          String?
   subcategory       String?
   developer         String?

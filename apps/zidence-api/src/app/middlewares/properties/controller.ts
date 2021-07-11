@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import slugify from 'slugify'
+import { validationResult } from "express-validator"
 
 import prisma from '../prismaClient'
 
@@ -22,6 +23,11 @@ export interface PropertyTypes {
 }
 
 export const addProperty = async (req: Request, res: Response) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const {
       name,

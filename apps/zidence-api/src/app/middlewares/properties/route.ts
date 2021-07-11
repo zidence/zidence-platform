@@ -7,26 +7,15 @@ import { getProperties, addProperty } from './controller'
 
 router.get('/', getProperties)
 router.post('/', [
-  check('name', 'Name Field is required')
+  check('name', 'Name Field min.3 characters')
     .isLength({ min: 3 }),
-  check('price', 'Price Field is required').isNumeric(),
-  check('category', 'Category Field is required')
+  check('category', 'Category Field min.3 characters')
     .isLength({ min: 3 }),
-  check('subcategory', 'Subcategory Field is required')
+  check('subcategory', 'Subcategory Field min.3 characters')
     .isLength({ min: 3 }),
-  check('developer', 'Developer Field is required')
+  check('developer', 'Developer Field min.3 characters')
     .isLength({ min: 3 }),
-  check('yearBuilt', 'Year of Built Field is required')
-    .isNumeric(),
-  check('lotSize', 'lotSize Field is required')
-    .isNumeric(),
-  check('unitSize', 'unitSize Field is required')
-    .isNumeric(),
-  check('numberOfBedrooms', 'numberOfBedrooms Field is required')
-    .isNumeric(),
-  check('numberOfBathrooms', 'numberOfBathrooms Field is required')
-    .isNumeric(),
-  check('owner', 'Owner Field is required')
+  check('owner', 'Owner Field min.3 characters')
     .isLength({ min: 3 })
 ], addProperty)
 

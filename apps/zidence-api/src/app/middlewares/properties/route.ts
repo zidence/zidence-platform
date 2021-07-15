@@ -33,4 +33,5 @@ router.put("/", [
     .isLength({ min: 3 })
 ], updateProperty)
 
+
 export default router

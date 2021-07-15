@@ -115,8 +115,8 @@ export const updateProperty = async (req: Request, res: Response) => {
   }
 
   try {
+    const { propertyId } = req.params
     const {
-      id,
       name,
       images,
       price,
@@ -135,7 +135,7 @@ export const updateProperty = async (req: Request, res: Response) => {
 
     const updatedProperty = await prisma.property.update({
       where: {
-        id: id,
+        id: propertyId,
       },
       data: {
         name,

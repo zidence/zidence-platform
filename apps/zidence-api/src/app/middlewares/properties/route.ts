@@ -20,7 +20,7 @@ router.post('/', [
     .isLength({ min: 3 })
 ], addProperty)
 
-router.put("/", [
+router.put("/:propertyId", [
   check('name', 'Name Field min.3 characters')
     .isLength({ min: 3 }),
   check('category', 'Category Field min.3 characters')

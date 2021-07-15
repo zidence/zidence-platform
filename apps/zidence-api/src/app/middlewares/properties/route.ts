@@ -3,7 +3,7 @@ const router = express.Router()
 
 import { check } from "express-validator"
 
-import { getProperties, addProperty, updateProperty } from './controller'
+import { getProperties, addProperty, updateProperty, deleteProperty } from './controller'
 
 router.get('/', getProperties)
 
@@ -32,5 +32,7 @@ router.put("/", [
   check('owner', 'Owner Field min.3 characters')
     .isLength({ min: 3 })
 ], updateProperty)
+
+router.delete("/:propertyId", deleteProperty)
 
 export default router

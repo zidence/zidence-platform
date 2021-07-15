@@ -163,13 +163,42 @@ export const updateProperty = async (req: Request, res: Response) => {
     }
 
     res.status(200).json({
-      success: true,
-      data: updatedProperty
+      message: 'Update property',
+      updatedProperty
     })
   } catch (error) {
     console.error(error.message)
     res.status(400).json({
       message: 'Update properties failed',
+      error: error.message,
+    })
+  }
+}
+
+export const deleteProperty = async (req: Request, res: Response) => {
+  try {
+    const { propertyId } = req.params;
+    const deletedProperty = await prisma.property.delete({
+      where: {
+        id: propertyId
+      }
+    });
+
+    if (!deletedProperty) {
+      return res.status(404).json({
+        success: false,
+        message: 'Delete Property failed'
+      })
+    }
+
+    res.status(200).json({
+      message: 'Delete property',
+      deletedProperty
+    })
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).json({
+      message: 'Delete property failed',
       error: error.message,
     })
   }

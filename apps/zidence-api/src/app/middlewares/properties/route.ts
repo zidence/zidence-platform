@@ -20,6 +20,17 @@ router.post('/', [
     .isLength({ min: 3 })
 ], addProperty)
 
-router.put("/", updateProperty)
+router.put("/", [
+  check('name', 'Name Field min.3 characters')
+    .isLength({ min: 3 }),
+  check('category', 'Category Field min.3 characters')
+    .isLength({ min: 3 }),
+  check('subcategory', 'Subcategory Field min.3 characters')
+    .isLength({ min: 3 }),
+  check('developer', 'Developer Field min.3 characters')
+    .isLength({ min: 3 }),
+  check('owner', 'Owner Field min.3 characters')
+    .isLength({ min: 3 })
+], updateProperty)
 
 export default router

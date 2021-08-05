@@ -3,9 +3,10 @@ const router = express.Router()
 
 import { check } from "express-validator"
 
-import { getProperties, addProperty, updateProperty, deleteProperty } from './controller'
+import { getProperties, getProperty, addProperty, updateProperty, deleteProperty } from './controller'
 
 router.get('/', getProperties)
+router.get("/:propertyId", getProperty)
 
 router.post('/', [
   check('name', 'Name Field min.3 characters')
